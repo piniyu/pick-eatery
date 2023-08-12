@@ -1,5 +1,6 @@
-import { PlaceResult } from "@/app/page";
+"use client";
 import Modal from "@/components/ui/modal";
+import { PlaceResult } from "@/types/place-api";
 import { ArrowPathIcon, ListBulletIcon } from "@heroicons/react/24/outline";
 import { StarIcon } from "@heroicons/react/24/solid";
 

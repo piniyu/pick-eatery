@@ -1,20 +1,21 @@
+"use client";
 import { StarIcon, BuildingStorefrontIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
-import { useState } from "react";
 
 const LG_IMG_WIDTH = 500;
 const MD_IMG_WIDTH = 500;
 const SM_IMG_WIDTH = 320;
 
 export default function Restaurant({ data }: { data: any }) {
-  const windowWidth = window
-    ? window.innerWidth > 1023
-      ? "lg"
-      : window.innerWidth > 767
-      ? "md"
-      : "sm"
-    : undefined;
+  const windowWidth =
+    typeof window !== "undefined"
+      ? window.innerWidth > 1023
+        ? "lg"
+        : window.innerWidth > 767
+        ? "md"
+        : "sm"
+      : undefined;
   const imgWidth = windowWidth
     ? windowWidth === "lg"
       ? LG_IMG_WIDTH

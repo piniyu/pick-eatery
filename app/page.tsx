@@ -4,16 +4,12 @@ import { useCallback, useEffect, useState } from "react";
 import useSWRMutation from "swr/mutation";
 import { MapPinIcon } from "@heroicons/react/24/outline";
 import { BuildingStorefrontIcon } from "@heroicons/react/24/solid";
-import Map from "@/components/map";
+// import Map from "@/components/map";
 import Button from "@/components/ui/button";
 import Restaurant from "@/components/restaurant";
 import RestaurantListModal from "@/components/restaurant-list-modal";
 import Category, { PlaceType } from "@/components/categories";
-
-export interface PlaceResult {
-  next_page_token: string;
-  results: google.maps.places.PlaceResult[];
-}
+import { PlaceResult } from "@/types/place-api";
 
 const fetcher = (
   url: string,
@@ -103,16 +99,18 @@ export default function Home() {
   };
 
   const onGetCoords = (fn?: (lat: number, lng: number) => void) => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      const { latitude: lat, longitude: lng } = position.coords;
-      if (position.coords.latitude) {
-        setCoords({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        });
-        fn && fn(lat, lng);
-      }
-    });
+    if (window) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const { latitude: lat, longitude: lng } = position.coords;
+        if (position.coords.latitude) {
+          setCoords({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          });
+          fn && fn(lat, lng);
+        }
+      });
+    }
   };
 
   const onClickCategory = (selected: PlaceType) => {
